@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Page</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+  
+    <div class="main">
+      
+        <div class="main-container">
+            <div class="header">
+                <h1><i class="bi bi-cloud-sun-fill"></i> Time Search</h1>
+            </div>
+            <div class="inputs">
+                <input class="form-control mb-2" type="text" placeholder="Enter city name" id="input-search" minlength="3" maxlength="20">
+                <div class="form-outline">
+                    <label class="form-label" for="typeNumber">Days input</label>
+                    <input type="number" id="days-input" class="form-control" placeholder="days" min="0" max="10" />
+                </div> 
+                <button type="button" class="btn btn-outline-success mt-2" id="btn-search">Search</button>
+            </div>
+        </div>
+  
+    <div class="results">
+        <h2 id="city"><i class="bi bi-building-fill"></i> City</h2>
+        <p id="json-api-time"></p>
+    </div>
+<script defer src="bundle.js"></script></body>
+</html>
