@@ -1,5 +1,9 @@
 @import 'bootstrap/scss/bootstrap';
 
-body {
-    background-color: #f8f9fa;
+#json-api-time{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 10px;
+    grid-auto-rows: minmax(100px, auto);
+    background-color: rebeccapurple;
 }

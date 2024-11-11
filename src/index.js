@@ -1,4 +1,5 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
+import './style.css'
 let api="https://archive-api.open-meteo.com/v1/archive?"
 var moment= require("moment");
 
@@ -25,7 +26,7 @@ function initApi(api,location,days){
     return resultApi;
 }
 
-async function getTime(location,days){
+async function getTime(location,days,element){
     try{
         let apiLocation=initApi(api,location,days);
         let response= await fetch(apiLocation);
@@ -33,35 +34,50 @@ async function getTime(location,days){
             throw new Error(`Error en la solicitud: ${response.status}`);
         }
         let timeData = await response.json();
-        displayWheaterData(timeData.daily);
+        displayWheaterData(timeData.daily,element);
     }
   catch(error){
     console.error("Error al obtener el tiempo:", error);
-    jsonContainer.textContent = "Error al obtener los datos";
+    element.textContent = "Error al obtener los datos";
     }
   }
-  function displayWheaterData(hourlyData){
-    jsonContainer.textContent = "";  
+  function displayWheaterData(hourlyData,element){
+    element.textContent = "";  
 
     hourlyData.time.forEach((time, index) => {
-        let titleIndex = document.createElement("p");
-        let timeP = document.createElement("p");
+        let card = document.createElement("div");
+        card.classList.add("card", "mb-3", "p-3");  // Clases de Bootstrap para las tarjetas
+        let cardBody = document.createElement("div");
+        cardBody.classList.add("card-body");
+
+        let titleIndex = document.createElement("h3");
+        
         let temperatureMaxP = document.createElement("p");
         let temperatureMinP = document.createElement("p");
         let temperatureMidP =document.createElement("p");
-       
-    
-        titleIndex.textContent = `Register ${index + 1} ${time}`;
-        timeP.textContent = `Time: ${time}`;
+       //style
+        temperatureMidP.classList.add("card-text");
+        temperatureMinP.classList.add("card-text");
+        temperatureMaxP.classList.add("card-text");
+        titleIndex.classList.add("card-title");
+        //parse
+        titleIndex.textContent = `Day: ${time}`;
         temperatureMaxP.textContent = `Temperatura Max: ${hourlyData.temperature_2m_max[index]} °C`;
         temperatureMinP.textContent = `Temperatura Min: ${hourlyData.temperature_2m_min[index]} °C`;
         temperatureMidP.textContent = `Temperatura Mid: ${hourlyData.temperature_2m_mean[index]} °C`;
         titleIndex.setAttribute("id","title-data")
-       
-        jsonContainer.appendChild(titleIndex);
-        titleIndex.appendChild(temperatureMaxP);
-        titleIndex.appendChild(temperatureMinP);
-        titleIndex.appendChild(temperatureMidP);
+
+        cardBody.appendChild(titleIndex);
+        cardBody.appendChild(temperatureMaxP);
+        cardBody.appendChild(temperatureMinP);
+        cardBody.appendChild(temperatureMidP);
+        card.appendChild(cardBody);
+        element.appendChild(card)
     });
 }
-  getTime("london",7);
+
+const allTimes= document.querySelectorAll("#json-api-time");
+allTimes.forEach((element)=>{
+    console.log(element);
+    getTime(element.className,8,element);
+})
