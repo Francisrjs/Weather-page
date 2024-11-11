@@ -26,12 +26,13 @@ function initApi(api, location, days) {
                 const apiCurrent = `${apiCurrentBase}latitude=${latitude}&longitude=${longitude}`;
                 console.log("apiCurrent URL:", apiCurrent);
                 putLastTemperature(apiCurrent,location);
+
                 const apiPos = `${api}latitude=${latitude}&longitude=${longitude}&`;
                 const endDate = moment().format("YYYY-MM-DD");
                 const startDate = moment().subtract(days, 'days').format("YYYY-MM-DD");
   
                 const resultApi = `${apiPos}start_date=${startDate}&end_date=${endDate}&daily=temperature_2m_max,temperature_2m_min,temperature_2m_mean`;
-                resolve({ resultApi, apiCurrent }); // Devolvemos ambas URLs
+                resolve({ resultApi }); // Devolvemos ambas URLs
             } else {
                 reject(new Error("No results found in API response."));
             }
