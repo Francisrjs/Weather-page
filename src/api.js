@@ -117,7 +117,7 @@ async function putLastTemperature(api) {
 
 
 
-      titleCity.innerHTML= `<i class="bi bi-building-fill"></i>${titleCity.textContent}, the last temperature:${latestTemperature}°C`;
+      titleCity.innerHTML= `<i class="bi bi-building-fill"></i>"<b>${titleCity.textContent}"</b>, the last temperature:"<b>${latestTemperature}°C"</b>`;
     } catch (error) {
       console.error("Error al obtener el tiempo actual:", error);
       titleCity.textContent = `Error: ${error.message}`;
