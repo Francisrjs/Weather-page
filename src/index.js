@@ -12,10 +12,9 @@ button.addEventListener("click",()=>{
     titleCity.innerHTML = `<i class="bi bi-building-fill"></i> ${searchText}`;
     let searchDay= document.querySelector("#days-input");
     let days=searchDay.value;
-    if (days>=61){
-      alert("Error: Days>60")
-    }else{
-      getTime(searchText,days,jsonContainer);
+    if (!search || isNaN(days) || days <= 0 || days >= 61||searchText=='') {
+      alert("Error: Ingrese una ubicación válida y un número de días entre 1 y 60.");
+    } else {
+      getTime(searchText, days, jsonContainer);
     }
-    
-})
+  });
